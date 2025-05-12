@@ -26,10 +26,11 @@ Naver Maps MCP provides the following <tools>. You must follow all <rules>.
 
 mcp = FastMCP("mcp_naver_maps", instructions=INSTRUCTIONS)
 
+
 @mcp.tool(description="Searches for address information related to the entered address.")
 async def geocode(
   address: str = Field(description="address to search for", min_length=1),
-  language: Literal["kor", "eng"] = Field("kor", description="language used in response")
+  language: Literal["kor", "eng"] = Field("kor", description="language used in response"),
 ) -> GeocodeResponse | Dict:
   """
   Returns:
@@ -38,13 +39,19 @@ async def geocode(
   try:
     return await naver_maps_client.geocode(address, language)
   except Exception as ex:
-    return { "success": False, "error": str(ex) }
+    return {"success": False, "error": str(ex)}
+
 
 @mcp.tool(description="Searches for places registered with Naver's local service.")
 async def localSearch(
   query: str = Field(description="query used for search", min_length=1),
-  display: int = Field(5, description="number of search results to display in response", ge=0, le=5),
-  sort: Literal["random", "comment"] = Field("random", description="sorting method. random: sorted by correctness. comment: sorted by a number of reviews (descending)"),
+  display: int = Field(
+    5, description="number of search results to display in response", ge=0, le=5
+  ),
+  sort: Literal["random", "comment"] = Field(
+    "random",
+    description="sorting method. random: sorted by correctness. comment: sorted by a number of reviews (descending)",
+  ),
 ) -> LocalSearchResponse | Dict:
   """
   Returns:
@@ -53,4 +60,4 @@ async def localSearch(
   try:
     return await naver_maps_client.searchForLocalInformation(query, display, sort)
   except Exception as ex:
-    return { "success": False, "error": str(ex) }
+    return {"success": False, "error": str(ex)}
