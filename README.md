@@ -1,6 +1,6 @@
 # MCP Naver Maps
 
-The MCP connects to the [Naver Maps API](https://www.ncloud.com/product/applicationService/maps) and [Naver Search API](https://developers.naver.com/products/service-api/search/search.md)
+The MCP connects to the [Naver Maps API](https://www.ncloud.com/product/applicationService/maps) and [Naver Search API](https://developers.naver.com/products/service-api/search/search.md). 네이버 지도 API와 검색 API에 (로컬) 연결하는 MCP 서버.
 
 It currently supports the following APIs:
 * [Geocoding](https://api.ncloud-docs.com/docs/application-maps-geocoding)
