@@ -24,7 +24,7 @@ Before you begin, ensure you have the following installed:
     NAVER_MAPS_CLIENT_ID="YOUR_NAVER_MAPS_CLIENT_ID"
     NAVER_MAPS_CLIENT_SECRET="YOUR_NAVER_MAPS_CLIENT_SECRET"
     NAVER_CLIENT_API="YOUR_NAVER_CLIENT_API"
-    NAVER_CLIENT_SECRET="YOUR_NAVER_CLIENT_SECRET
+    NAVER_CLIENT_SECRET="YOUR_NAVER_CLIENT_SECRET"
     ```
     Please verify the exact environment variable names required by checking `src/mcp_naver_maps/naver_maps_client.py`.
 
