@@ -2,6 +2,10 @@
 
 The MCP connects to the [Naver Maps API](https://www.ncloud.com/product/applicationService/maps) and [Naver Search API](https://developers.naver.com/products/service-api/search/search.md). 네이버 지도 API와 검색 API에 (로컬) 연결하는 MCP 서버.
 
+<a href="https://glama.ai/mcp/servers/@yunkee-lee/mcp-naver-maps">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@yunkee-lee/mcp-naver-maps/badge" alt="Naver Maps MCP server" />
+</a>
+
 It currently supports the following APIs:
 * [Geocoding](https://api.ncloud-docs.com/docs/application-maps-geocoding)
 * [Local saerch](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
