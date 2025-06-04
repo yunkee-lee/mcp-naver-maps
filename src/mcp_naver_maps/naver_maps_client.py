@@ -52,7 +52,7 @@ class NaverMapsClient:
     return GeocodeResponse(**response_json)
 
   async def searchForLocalInformation(
-    self, query: str, display: int = 5, sort: Literal["random", "comment"] = "random"
+    self, query: str, display: int = 5, sort: Literal["random", "comment"] = "random", start: int = 1
   ) -> LocalSearchResponse:
     """
     https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD
@@ -62,6 +62,7 @@ class NaverMapsClient:
       "query": query,
       "display": display,
       "sort": sort,
+      "start": start
     }
     response_json = await self._get(path, self.naver_headers, params)
     return LocalSearchResponse(**response_json)

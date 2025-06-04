@@ -31,6 +31,21 @@ class LocalItem(BaseModel):
   description: str = Field(description="Brief description of the place")
   address: str = Field(description="Land-lot address")
   roadAddress: str = Field(description="Street address")
+  mapx: str = Field(description="X coordinate (longitude)")
+  mapy: str = Field(description="Y coordinate (latitude)")
+  
+  def dict(self, *args, **kwargs):
+    """Override dict method for JSON serialization"""
+    return {
+      "title": self.title,
+      "link": self.link,
+      "category": self.category,
+      "description": self.description,
+      "address": self.address,
+      "roadAddress": self.roadAddress,
+      "mapx": self.mapx,
+      "mapy": self.mapy
+    }
 
 
 class LocalSearchResponse(BaseModel):

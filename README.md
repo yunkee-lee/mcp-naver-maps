@@ -4,7 +4,8 @@ The MCP connects to the [Naver Maps API](https://www.ncloud.com/product/applicat
 
 It currently supports the following APIs:
 * [Geocoding](https://api.ncloud-docs.com/docs/application-maps-geocoding)
-* [Local saerch](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
+* [Local search](https://developers.naver.com/docs/serviceapi/search/local/local.md#%EC%A7%80%EC%97%AD)
+* [Coordinate-based local search](#coordinate-based-local-search) - Search for places within a specific radius from coordinates
 
 ## Prerequisites
 
@@ -45,3 +46,64 @@ Before you begin, ensure you have the following installed:
     source .venv/bin/activate
     mcp dev src/mcp_naver_maps/server.py
     ```
+
+## MCP Configuration
+
+To configure this MCP in your environment, add the following to your MCP configuration:
+
+```json
+"mcpServers": {
+    "mcp-naver-location": {
+        "command": "uv",
+        "args": ["run", "/path/to/mcp-naver-maps/src/mcp_naver_maps"],
+        "env": {
+            "NAVER_MAPS_CLIENT_ID": "<YOUR_NAVER_MAPS_CLIENT_ID>",
+            "NAVER_MAPS_CLIENT_SECRET": "<YOUR_NAVER_MAPS_CLIENT_SECRET>",
+            "NAVER_CLIENT_API": "<YOUR_NAVER_CLIENT_API>",
+            "NAVER_CLIENT_SECRET": "<YOUR_NAVER_CLIENT_SECRET>"
+        }
+    }
+}
+```
+
+Replace the placeholder values with your actual Naver API credentials.
+
+## Coordinate-based Local Search
+
+This feature allows you to search for places within a specific radius from given coordinates.
+
+### Usage
+
+```python
+result = await localSearchByCoordinate(
+    query="카페",                # Search query
+    longitude=126.9707,         # Center longitude (x coordinate)
+    latitude=37.5536,           # Center latitude (y coordinate)
+    radius=1000,                # Search radius in meters (default: 1000m = 1km)
+    display=5,                  # Maximum number of results to display (default: 5)
+    sort="random",              # Sorting method (default: "random")
+    min_results=1               # Minimum number of results to return (default: 1)
+)
+```
+
+### Parameters
+
+- **query** (required): Search query string
+- **longitude** (required): Center longitude (x coordinate)
+- **latitude** (required): Center latitude (y coordinate)
+- **radius** (optional): Search radius in meters, default is 1000m (1km)
+- **display** (optional): Maximum number of results to display, default is 5
+- **sort** (optional): Sorting method, either "random" (by relevance) or "comment" (by number of reviews)
+- **min_results** (optional): Minimum number of results to return, default is 1
+
+### Example Prompts
+
+```
+서울역(경도: 126.9707, 위도: 37.5536) 주변 1km 이내의 맛집을 찾아줘.
+```
+
+```
+센터필드 EAST 좌표를 찾아서 반경 700m 이내의 맛집을 추천해줘. 
+- 검색할 때는 '역삼동 근처 고기구이'처럼 지역명을 포함해서 검색
+- 색인할 음식 주제: [삼겹살, 갈비, LA갈비, 양갈비, 곱창, 닭갈비] 등 육류
+```
